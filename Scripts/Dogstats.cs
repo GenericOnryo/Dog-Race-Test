@@ -15,13 +15,13 @@ namespace Assets.Scripts
         [Range(0, 10)] public double Friendliness;
         [Range(0, 10)] public double Aggression;
         [Range(0, 10)] public double Intelligence;
-        public GameObject DogGameObject;
+        //public GameObject DogGameObject;
 
-        public string Name => DogGameObject?.name ?? "NO PREFAB ASSIGNED";
+        //public string Name => DogGameObject?.name ?? "NO PREFAB ASSIGNED";
 
         public Dogstats()
         {
-
+            
         }
     }
 }
