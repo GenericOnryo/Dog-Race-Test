@@ -33,7 +33,6 @@ public class Dog : MonoBehaviour
     private float startTime;
     private float elapsedTime;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -100,16 +99,22 @@ public class Dog : MonoBehaviour
         lastVelocity = rb.velocity;
 
         elapsedTime = Time.time - startTime;
+
         elapsedTimeTraveling = elapsedTime;
- 
+
         double speedNumerator = (maxSpeed + (0.1 * elapsedTimeTraveling));
         if (Size < -5)
+        {
             speedCurrent = speedNumerator / (1 + Math.Exp(-(((Math.Abs(Size) - 5) * Acceleration) + 0.1) * (elapsedTimeTraveling - 20 + (10 * ((10 * Acceleration) + (0.1 * Math.Abs(Size)))) - Math.Abs(Speed - 4))));
+        }
         else if (Speed > 5)
+        {
             speedCurrent = speedNumerator / (1 + Math.Exp(-(Acceleration + 0.1) * (elapsedTimeTraveling - 20 + (10 * (10 * Acceleration)))));
+        }
         else
+        {
             speedCurrent = speedNumerator / (1 + Math.Exp(-0.1 * (elapsedTimeTraveling - 20)));
-
+        }
 
 
     }
@@ -119,11 +124,12 @@ public class Dog : MonoBehaviour
         //  var direction = Vector2.Reflect(lastVelocity.normalized, coll.contacts[0].normal);
         var collideNormal = coll.GetContact(0).normal;
         var rb = GetComponent<Rigidbody2D>();
-        var speed = lastVelocity.magnitude;
+        //var speed = lastVelocity.magnitude;
         var direction = DogVectors.GetRandomVector2RestrictByNormal((float)speedCurrent, collideNormal);
         rb.velocity = direction;
 
-        
+        startTime += (0.1f * elapsedTime);
+
 
 
     }
